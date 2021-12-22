@@ -233,8 +233,8 @@ async function chapter(manga,chapter) {
 	
         let current_ch = $('.active').text().trim()
         
-        let prev = $('.prev_page').attr('href').replace('https://hiperdex.com/manga','/chapter')
-        let next = $('.next_page').attr('href').replace('https://hiperdex.com/manga','/chapter')
+        let prev = $('.prev_page').attr('href')
+        let next = $('.next_page').attr('href')
 
         return await ({
             'manga': manga_title,
