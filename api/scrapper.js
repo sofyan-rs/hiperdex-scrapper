@@ -60,9 +60,6 @@ async function chaptersList(url){
                 url = $elements.find('a').attr('href')
 		slug = url.replace('https://hiperdex.com/manga','/chapter')
                 time = $elements.find('.chapter-release-date').find('i').text()
-		if (time == "") {
-		   time = '<span className="new">New<span>'
-		}
                 status = $elements.find('.chapter-release-date').find('a').attr('title')
 
                 chapters = {'ch_title': title, 'time': time, 'status': status, 'url': url, 'slug': slug}
