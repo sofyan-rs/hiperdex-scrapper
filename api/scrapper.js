@@ -163,12 +163,14 @@ async function latest(page) {
 
                     let c_title = $(e).find('a').text().trim()
                     let c_url = $(e).find('a').attr('href')
+		    let c_slug = c_url.replace('https://hiperdex.com/','')
                     let c_date = $(e).find('.post-on').text().trim()
                     let status = $(e).find('.post-on a').attr('title')
 
                     chapters.push({
                         'c_title': c_title,
                         'c_url': c_url,
+			'c_slug': c_slug,
                         'c_date': c_date,
                         'status': status
                     })
