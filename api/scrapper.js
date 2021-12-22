@@ -235,7 +235,8 @@ async function chapter(manga,chapter) {
         
         let prev = $('.prev_page').attr('href')
         let next = $('.next_page').attr('href')
-        
+	let prev_slug = prev.replace('https://hiperdex.com/manga','/chapter')
+	let next_slug = next.replace('https://hiperdex.com/manga','/chapter')
 
         return await ({
             'manga': manga_title,
@@ -245,7 +246,9 @@ async function chapter(manga,chapter) {
             'chapters': ch_list,
             'nav':[{
                 'prev': prev,
-                'next': next
+                'next': next,
+		'prev_slug': prev_slug,
+                'next_slug': next_slug
             }]
         })
      } catch (error) {
