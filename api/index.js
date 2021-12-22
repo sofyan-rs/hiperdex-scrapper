@@ -16,32 +16,26 @@ app.get('/api/', (req, res) => {
 })
 
 app.get('/api/latest/:page', async (req, res) => {
-
     const result = await scapper.latest(req.params.page)
     res.header("Content-Type", 'application/json');
     res.send(JSON.stringify(result, null, 4))
 })
 
 app.get('/api/all/:page', async (req, res) => {
-
     const result = await scapper.all(req.params.page)
-
     res.setHeader('Cache-Control', 's-maxage=43200');
     res.header("Content-Type", 'application/json');
     res.send(JSON.stringify(result, null, 4))
 })
 
 app.get('/api/info/:slug', async (req, res) => {
-
     const result = await scapper.info(req.params.slug)
     res.header("Content-Type", 'application/json');
     res.send(JSON.stringify(result, null, 4))
 })
 
 app.get('/api/chapter/:manga/:chapter', async (req, res) => {
-
     const result = await scapper.chapter(req.params.manga,req.params.chapter)
-
     res.setHeader('Cache-Control', 's-maxage=43200');
     res.header("Content-Type", 'application/json');
     res.send(JSON.stringify(result, null, 4))
