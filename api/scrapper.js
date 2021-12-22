@@ -58,10 +58,11 @@ async function chaptersList(url){
                 $elements = $(element)
                 title = $elements.find('a').text().trim()
                 url = $elements.find('a').attr('href')
+		slug = url.replace('https://hiperdex.com/','')
                 time = $elements.find('.chapter-release-date').find('i').text()
                 status = $elements.find('.chapter-release-date').find('a').attr('title')
 
-                chapters = {'ch_title': title, 'time': time, 'status': status, 'url': url}
+                chapters = {'ch_title': title, 'time': time, 'status': status, 'url': url, 'slug': slug}
 
                 ch_list.push(chapters)     
         })
@@ -88,6 +89,7 @@ async function all(page) {
                 $elements = $(element)
                 image = $elements.find('.page-item-detail').find('img').attr('src')
                 url = $elements.find('.page-item-detail').find('a').attr('href')
+		slug = url.replace('https://hiperdex.com/','')
                 title = $elements.find('.page-item-detail .post-title').find('h3').text().trim()
                 rating = $elements.find('.total_votes').text().trim()
 
@@ -99,12 +101,14 @@ async function all(page) {
 
                     let c_title = $(e).find('a').text().trim()
                     let c_url = $(e).find('a').attr('href')
+		    let c_slug = c_url.replace('https://hiperdex.com/','')
                     let c_date = $(e).find('.post-on').text().trim()
                     let status = $(e).find('.post-on a').attr('title')
 
                     chapters.push({
                         'c_title': c_title,
                         'c_url': c_url,
+			'c_slug': c_slug,
                         'c_date': c_date,
                         'status': status
                     })
@@ -115,6 +119,7 @@ async function all(page) {
                     'rating': rating,
                     'image': image,
                     'url': url,
+		    'slug': slug,
                     'chapters': chapters
                 })     
         })
@@ -152,6 +157,7 @@ async function latest(page) {
                 $elements = $(element)
                 image = $elements.find('.page-item-detail').find('img').attr('src')
                 url = $elements.find('.page-item-detail').find('a').attr('href')
+		slug = url.replace('https://hiperdex.com/','')
                 title = $elements.find('.page-item-detail .post-title').find('h3').text().trim()
                 rating = $elements.find('.total_votes').text().trim()
 
@@ -181,6 +187,7 @@ async function latest(page) {
                     'rating': rating,
                     'image': image,
                     'url': url,
+		    'slug': slug,
                     'chapters': chapters
                 })     
         })
@@ -222,7 +229,8 @@ async function chapter(manga,chapter) {
 
         let manga_title = $('#chapter-heading').text().trim()
         let manga_url = $('.breadcrumb > li:nth-child(2) > a:nth-child(1)').attr('href')
-        
+        let manga_slug = manga_url.replace('https://hiperdex.com/','')
+	
         let current_ch = $('.active').text().trim()
         
         let prev = $('.prev_page').attr('href')
@@ -231,7 +239,8 @@ async function chapter(manga,chapter) {
 
         return await ({
             'manga': manga_title,
-            'manga_url':manga_url,
+            'manga_url': manga_url,
+	    'manga_slug': manga_slug,
             'current_ch': current_ch,
             'chapters': ch_list,
             'nav':[{
