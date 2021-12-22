@@ -233,8 +233,8 @@ async function chapter(manga,chapter) {
 	
         let current_ch = $('.active').text().trim()
         
-        let prev = $('.prev_page').attr('href')
-        let next = $('.next_page').attr('href')
+        let prev = $('.prev_page').attr('href').replace('https://hiperdex.com/manga','/chapter')
+        let next = $('.next_page').attr('href').replace('https://hiperdex.com/manga','/chapter')
 
         return await ({
             'manga': manga_title,
@@ -244,9 +244,7 @@ async function chapter(manga,chapter) {
             'chapters': ch_list,
             'nav':[{
                 'prev': prev,
-                'next': next,
-		'prev_slug': prev_slug,
-                'next_slug': next_slug
+                'next': next
             }]
         })
      } catch (error) {
