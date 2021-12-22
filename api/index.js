@@ -36,7 +36,6 @@ app.get('/api/info/:slug', async (req, res) => {
 
 app.get('/api/chapter/:manga/:chapter', async (req, res) => {
     const result = await scapper.chapter(req.params.manga,req.params.chapter)
-    res.setHeader('Cache-Control', 's-maxage=43200');
     res.header("Content-Type", 'application/json');
     res.send(JSON.stringify(result, null, 4))
 })
