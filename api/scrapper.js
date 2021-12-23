@@ -198,7 +198,7 @@ async function search(search, page) {
                 })  
 
         })
-	let current = current = $('.current').text()
+	let current = $('.current').text()
       	
 	let check_page = $('.pages').text()
 	let last_page = check_page.match(/\d+/g)
