@@ -153,10 +153,10 @@ async function search(search, page) {
 
     let m_list = []
     
-    if(page){
-	const pages = "page" + page + "/";
+    if(page === undefined){
+	let pages = "page/" + page + "/";
     } else {
-    	const pages = "";
+    	let pages = "";
     }
 
     try{
