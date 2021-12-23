@@ -203,8 +203,7 @@ async function search(search, page) {
 	let check_page = $('.pages').text()
 	let last_page = check_page.match(/\d+/g)
 	
-	console.log(current)
-	console.log(last_page)
+
 
         return await ({
             'p_title': p_title,
