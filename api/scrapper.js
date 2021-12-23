@@ -169,7 +169,7 @@ async function search(search, page) {
                 title = $elements.find('.tab-summary .post-title').find('h3').text().trim()
                 rating = $elements.find('.total_votes').text().trim()
 		
-		chapter = $elements.find('.latest-chap')
+		chapter = $elements.find('.tab-meta')
 
                 let chapters = []
                 
