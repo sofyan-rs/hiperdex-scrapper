@@ -41,6 +41,12 @@ app.get('/api/chapter/:manga/:chapter', async (req, res) => {
     res.send(JSON.stringify(result, null, 4))
 })
 
+app.get('/api/genre/:genre/:page', async (req, res) => {
+    const result = await scapper.genre(req.params.genre,req.params.page)
+    res.header("Content-Type", 'application/json');
+    res.send(JSON.stringify(result, null, 4))
+})
+
 port = env.PORT || 3000
 app.listen(port, () => {
     console.log(`Listening to port ${port}`)
