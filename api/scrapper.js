@@ -130,7 +130,7 @@ async function all(page) {
         let current = $('.current').text()
       	
 	let check_page = $('.pages').text()
-	let last_page = test_page.match(/\d+/g)
+	let last_page = check_page.match(/\d+/g)
 
         return await ({
             'p_title': p_title,
