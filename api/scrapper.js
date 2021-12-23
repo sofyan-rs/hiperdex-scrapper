@@ -203,11 +203,14 @@ async function search(search, page) {
 	let check_page = $('.pages').text()
 	let last_page = check_page.match(/\d+/g)
 	
+	
 
 
         return await ({
             'p_title': p_title,
             'list': m_list,
+            'current_page': current,
+            'last_page': last_page[1]
         })
      } catch (error) {
         return await ({'error': 'Sorry dude, an error occured! No List!'})
