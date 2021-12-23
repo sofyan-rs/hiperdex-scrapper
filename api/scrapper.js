@@ -20,7 +20,7 @@ async function info(slug) {
 	    $elements = $(element)
 	    genre_title = $elements.text().trim()
 	    genre_url = $elements.attr('href')
-	    genre_slug = url.replace('https://hiperdex.com/manga-genre','/genre')
+	    genre_slug = genre_url.replace('https://hiperdex.com/manga-genre','/genre')
 	    genre_list = {'genre_title': genre_title, 'genre_url': genre_url, 'genre_slug': genre_slug}
 	    genres.push(genre_list)
         })
