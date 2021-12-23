@@ -136,10 +136,10 @@ async function all(page) {
             'p_title': p_title,
             'list': m_list,
             'current_page': parseInt(current),
-            'last_page': parseInt(last_page[1]),
+            'last_page': parseInt(last_page[1])
         })
     } catch (error) {
-        return await ({'error': 'Sorry dude, an error occured! No Latest!'})
+        return await ({'error': 'Sorry dude, an error occured! No List!'})
      }
 
 }
@@ -197,14 +197,14 @@ async function latest(page) {
 
         let current = $('.current').text()
         
-        let last_page = $('.last').attr('href')
-        !last_page?last_page=current:last_page
+        let check_page = $('.pages').text()
+	let last_page = check_page.match(/\d+/g)
 
          return await ({
             'p_title': p_title,
             'list': m_list,
             'current_page': parseInt(current),
-            'last_page': parseInt(last_page.replace(/[^0-9]/g, ''))
+            'last_page': parseInt(last_page[1])
         })
     } catch (error) {
         return await ({'error': 'Sorry dude, an error occured! No Latest!'})
@@ -212,6 +212,73 @@ async function latest(page) {
 
 }
 
+async function genre(genre, page) {
+
+    let m_list = []
+
+    try{
+        res = await axios.get(`https://hiperdex.com/manga-genre/${genre}/page/${page}`)
+        const body = await res.data;
+        const $ = cheerio.load(body)
+
+        let p_title = $('.c-blog__heading h1').text().trim()
+
+        $('#loop-content .badge-pos-1').each((index, element) => {
+
+                $elements = $(element)
+                image = $elements.find('.page-item-detail').find('img').attr('src')
+                url = $elements.find('.page-item-detail').find('a').attr('href')
+		slug = url.replace('https://hiperdex.com/manga','/series')
+                title = $elements.find('.page-item-detail .post-title').find('h3').text().trim()
+                rating = $elements.find('.total_votes').text().trim()
+
+                chapter = $elements.find('.list-chapter .chapter-item')
+
+                let chapters = []
+                
+                $(chapter).each((i,e)=>{
+
+                    let c_title = $(e).find('a').text().trim()
+                    let c_url = $(e).find('a').attr('href')
+		    let c_slug = c_url.replace('https://hiperdex.com/manga','/chapter')
+                    let c_date = $(e).find('.post-on').text().trim()
+                    let status = $(e).find('.post-on a').attr('title')
+
+                    chapters.push({
+                        'c_title': c_title,
+                        'c_url': c_url,
+			'c_slug': c_slug,
+                        'c_date': c_date,
+                        'status': status
+                    })
+                })
+
+                m_list.push({
+                    'title': title,
+                    'rating': rating,
+                    'image': image,
+                    'url': url,
+		    'slug': slug,
+                    'chapters': chapters
+                })     
+        })
+
+        let current = $('.current').text()
+      	
+	let check_page = $('.pages').text()
+	let last_page = check_page.match(/\d+/g)
+
+        return await ({
+            'p_title': p_title,
+            'list': m_list,
+            'current_page': parseInt(current),
+            'last_page': parseInt(last_page[1])
+        })
+    } catch (error) {
+        return await ({'error': 'Sorry dude, an error occured! No List!'})
+     }
+
+}
 
 async function chapter(manga,chapter) {
 
