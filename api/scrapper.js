@@ -27,7 +27,7 @@ async function info(slug) {
 
         let other_name = $('div.post-content_item:nth-child(5) > div:nth-child(2)').text().trim()
         
-        let status = $('div.post-content_item:nth-child(2) > div:nth-child(2) a').text().trim()
+        let status = $('div.post-content_item:nth-child(2) > div:nth-child(2)').text().trim()
 	
 	let released = $('div.post-content_item:nth-child(1) > div:nth-child(2) a').text().trim()
         
