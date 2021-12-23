@@ -149,12 +149,12 @@ async function all(page) {
 
 }
 
-async function search(page) {
+async function search(search, page) {
 
     let m_list = []
 
     try{
-        res = await axios.get(`https://hiperdex.com/manga-list/page/${page}`)
+        res = await axios.get(`https://hiperdex.com/page/${page}/?s=${search}&post_type=wp-manga`)
         const body = await res.data;
         const $ = cheerio.load(body)
 
