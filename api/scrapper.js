@@ -226,7 +226,7 @@ async function genre(genre, page) {
         const body = await res.data;
         const $ = cheerio.load(body)
 
-        let p_title = $('.item-title h4').text().trim()
+        let p_title = $('.item-title.h4').text().trim()
 
         $('.page-content-listing .badge-pos-1').each((index, element) => {
 
