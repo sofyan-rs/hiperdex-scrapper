@@ -16,10 +16,10 @@ async function info(slug) {
 
         let genres_e = $('.genres-content a')
         
-        $(genres_e).each((i,e)=>{
-	    $elements = $(e)
+        $(genres_e).each((index, element)=>{
+	    $elements = $(element)
 	    genre_title = $elements.text().trim()
-	    genre_title = $elements.attr('href')
+	    url = $elements.attr('href')
 	    slug = url.replace('https://hiperdex.com/manga-genre','/genre')
 	    genre_list = {'genre_title': genre_title, 'url': url, 'slug': slug}
 	    genres.push(genre_list)
