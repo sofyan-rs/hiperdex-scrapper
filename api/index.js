@@ -52,6 +52,12 @@ app.get('/api/genre/:genre/:page', async (req, res) => {
     res.send(JSON.stringify(result, null, 4))
 })
 
+app.get('/api/search/:search/', async (req, res) => {
+    const result = await scapper.search(req.params.search)
+    res.header("Content-Type", 'application/json');
+    res.send(JSON.stringify(result, null, 4))
+})
+
 app.get('/api/search/:search/:page', async (req, res) => {
     const result = await scapper.search(req.params.search,req.params.page)
     res.header("Content-Type", 'application/json');
