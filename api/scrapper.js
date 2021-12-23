@@ -169,12 +169,32 @@ async function search(search, page) {
                 title = $elements.find('.tab-summary .post-title').find('h3').text().trim()
                 rating = $elements.find('.total_votes').text().trim()
 		
+		chapter = $elements.find('.latest-chap')
+
+                let chapters = []
+                
+                $(chapter).each((i,e)=>{
+
+                    let c_title = $(e).find('a').text().trim()
+                    let c_url = $(e).find('a').attr('href')
+		    let c_slug = c_url.replace('https://hiperdex.com/manga','/chapter')
+                    let c_date = $(e).find('.post-on').text().trim()
+
+                    chapters.push({
+                        'c_title': c_title,
+                        'c_url': c_url,
+			'c_slug': c_slug,
+                        'c_date': c_date
+                    })
+                })
+		
 		m_list.push({
                     'title': title,
                     'rating': rating,
                     'image': image,
                     'url': url,
 		    'slug': slug,
+                    'chapters': chapters
                 })  
 
         })
