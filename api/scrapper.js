@@ -221,9 +221,9 @@ async function genre(genre, page) {
         const body = await res.data;
         const $ = cheerio.load(body)
 
-        let p_title = $('.c-blog__heading h1').text().trim()
+        let p_title = $('.item-title h4').text().trim()
 
-        $('#loop-content .badge-pos-1').each((index, element) => {
+        $('.page-content-listing .badge-pos-1').each((index, element) => {
 
                 $elements = $(element)
                 image = $elements.find('.page-item-detail').find('img').attr('src')
