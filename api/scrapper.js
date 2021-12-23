@@ -198,11 +198,12 @@ async function search(search, page) {
                 })  
 
         })
-
-        let current = $('.current').text()
+	let current = ""
+        current = $('.current').text()
       	
+	let last_page = ""
 	let check_page = $('.pages').text()
-	let last_page = check_page.match(/\d+/g)
+	last_page = check_page.match(/\d+/g)
 
         return await ({
             'p_title': p_title,
