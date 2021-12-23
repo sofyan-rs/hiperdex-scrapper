@@ -136,7 +136,7 @@ async function all(page) {
             'p_title': p_title,
             'list': m_list,
             'current_page': parseInt(current),
-            'last_page': last_page[1],
+            'last_page': parseInt(last_page[1]),
         })
     } catch (error) {
         return await ({'error': 'Sorry dude, an error occured! No Latest!'})
