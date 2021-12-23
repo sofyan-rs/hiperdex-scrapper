@@ -131,7 +131,7 @@ async function all(page) {
                     'chapters': chapters
                 })     
         })
-
+	    
         let current = $('.current').text()
       	
 	let check_page = $('.pages').text()
@@ -140,8 +140,8 @@ async function all(page) {
         return await ({
             'p_title': p_title,
             'list': m_list,
-            'current_page': parseInt(current),
-            'last_page': parseInt(last_page[1])
+            'current_page': current,
+            'last_page': last_page
         })
     } catch (error) {
         return await ({'error': 'Sorry dude, an error occured! No List!'})
@@ -198,6 +198,7 @@ async function search(search, page) {
                 })  
 
         })
+	    
 	let current = $('.current').text()
       	
 	let check_page = $('.pages').text()
@@ -267,15 +268,15 @@ async function latest(page) {
         })
 
         let current = $('.current').text()
-        
-        let check_page = $('.pages').text()
+      	
+	let check_page = $('.pages').text()
 	let last_page = check_page.match(/\d+/g)
 
-         return await ({
+        return await ({
             'p_title': p_title,
             'list': m_list,
-            'current_page': parseInt(current),
-            'last_page': parseInt(last_page[1])
+            'current_page': current,
+            'last_page': last_page
         })
     } catch (error) {
         return await ({'error': 'Sorry dude, an error occured! No Latest!'})
@@ -342,8 +343,8 @@ async function completed(page) {
         return await ({
             'p_title': p_title,
             'list': m_list,
-            'current_page': parseInt(current),
-            'last_page': parseInt(last_page[1])
+            'current_page': current,
+            'last_page': last_page
         })
     } catch (error) {
         return await ({'error': 'Sorry dude, an error occured! No List!'})
@@ -410,8 +411,8 @@ async function genre(genre, page) {
         return await ({
             'p_title': p_title,
             'list': m_list,
-            'current_page': parseInt(current),
-            'last_page': parseInt(last_page[1])
+            'current_page': current,
+            'last_page': last_page
         })
     } catch (error) {
         return await ({'error': 'Sorry dude, an error occured! No List!'})
