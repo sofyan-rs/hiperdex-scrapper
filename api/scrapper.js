@@ -168,6 +168,14 @@ async function search(search, page) {
 		slug = url.replace('https://hiperdex.com/manga','/series')
                 title = $elements.find('.tab-summary .post-title').find('h3').text().trim()
                 rating = $elements.find('.total_votes').text().trim()
+		
+		m_list.push({
+                    'title': title,
+                    'rating': rating,
+                    'image': image,
+                    'url': url,
+		    'slug': slug,
+                })  
 
         })
 
