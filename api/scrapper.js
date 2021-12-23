@@ -324,8 +324,9 @@ async function chapter(manga,chapter) {
 }
 
 module.exports = {
-	latest,
+    latest,
     all,
+    genre,
     info,
     chapter
 }
