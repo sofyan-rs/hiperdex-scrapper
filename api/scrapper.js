@@ -128,7 +128,7 @@ async function all(page) {
         
         let last_page = $('.last').attr('href')
 	
-	let test_page = $('.pages').text()
+	let test_page = $('.pages').text().trim()
         
 	!last_page?last_page=current:last_page
 
