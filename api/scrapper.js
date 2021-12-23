@@ -207,8 +207,6 @@ async function search(search, page) {
         return await ({
             'p_title': p_title,
             'list': m_list,
-            'current_page': current,
-            'last_page': last_page
         })
      } catch (error) {
         return await ({'error': 'Sorry dude, an error occured! No List!'})
