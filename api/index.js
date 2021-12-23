@@ -23,7 +23,12 @@ app.get('/api/latest/:page', async (req, res) => {
 
 app.get('/api/all/:page', async (req, res) => {
     const result = await scapper.all(req.params.page)
-    res.setHeader('Cache-Control', 's-maxage=43200');
+    res.header("Content-Type", 'application/json');
+    res.send(JSON.stringify(result, null, 4))
+})
+
+app.get('/api/completed/:page', async (req, res) => {
+    const result = await scapper.completed(req.params.page)
     res.header("Content-Type", 'application/json');
     res.send(JSON.stringify(result, null, 4))
 })
