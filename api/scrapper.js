@@ -142,7 +142,7 @@ async function all(page) {
             'list': m_list,
             'current_page': parseInt(current),
             'last_page': parseInt(last_page.replace(/[^0-9]/g, '')),
-	    'test_page': test_lagi,
+	    'test_page': test_lagi[1],
         })
     } catch (error) {
         return await ({'error': 'Sorry dude, an error occured! No Latest!'})
