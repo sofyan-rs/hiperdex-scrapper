@@ -27,12 +27,6 @@ app.get('/api/all/:page', async (req, res) => {
     res.send(JSON.stringify(result, null, 4))
 })
 
-app.get('/api/search/:page', async (req, res) => {
-    const result = await scapper.search(req.params.page)
-    res.header("Content-Type", 'application/json');
-    res.send(JSON.stringify(result, null, 4))
-})
-
 app.get('/api/completed/:page', async (req, res) => {
     const result = await scapper.completed(req.params.page)
     res.header("Content-Type", 'application/json');
@@ -54,6 +48,12 @@ app.get('/api/chapter/:manga/:chapter', async (req, res) => {
 
 app.get('/api/genre/:genre/:page', async (req, res) => {
     const result = await scapper.genre(req.params.genre,req.params.page)
+    res.header("Content-Type", 'application/json');
+    res.send(JSON.stringify(result, null, 4))
+})
+
+app.get('/api/search/:search/:page', async (req, res) => {
+    const result = await scapper.search(req.params.search,req.params.page)
     res.header("Content-Type", 'application/json');
     res.send(JSON.stringify(result, null, 4))
 })
