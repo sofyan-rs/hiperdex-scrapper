@@ -128,7 +128,7 @@ async function all(page) {
         
         let last_page = $('.last').attr('href')
 	
-	let test_page = $('.pages').text().trim()
+	let test_page = $('.pages').text()
         
 	!last_page?last_page=current:last_page
 
@@ -137,7 +137,7 @@ async function all(page) {
             'list': m_list,
             'current_page': parseInt(current),
             'last_page': parseInt(last_page.replace(/[^0-9]/g, '')),
-	    'total_page': test_page,
+	    'test_page': test_page,
         })
     } catch (error) {
         return await ({'error': 'Sorry dude, an error occured! No Latest!'})
