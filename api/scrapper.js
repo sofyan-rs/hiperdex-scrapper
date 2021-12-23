@@ -152,12 +152,13 @@ async function all(page) {
 async function search(search, page) {
 
     let m_list = []
-    
+    let pages = ""
     if(page === undefined){
-	let pages = "page/" + page + "/";
+	pages = "page/" + page + "/";
     } else {
-    	let pages = "";
+    	pages = "";
     }
+    pages = "page/" + page + "/";
 
     try{
         res = await axios.get(`https://hiperdex.com/${pages}?s=${search}&post_type=wp-manga`)
