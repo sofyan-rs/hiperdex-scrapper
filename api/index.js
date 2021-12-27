@@ -8,10 +8,12 @@ app.use(cors())
 
 app.get('/api/', (req, res) => {
     res.send(`
-        Latest Chapters at: /api/latest/:page (example: /api/latest/1) <br>
-        All Manhwa List at: /api/all/:page (example: /api/all/1) <br>
-        Manhwa Info + Chapters at: /api/info/:slug (example: /api/info/secret-class) <br>
-        Manhwa Images List at: /api/chapter/:slug (example: /api/chapter/nano-machine/chapter-68/)
+        Latest Chapters at: /api/latest/:page (example: /api/latest/1)<br>
+        All Manhwa List at: /api/all/:page (example: /api/all/1)<br>
+        Manhwa Search at: /api/search/:search+query/:page (example: /api/search/a/1)<br>
+        Manhwa Genre at: /api/genre/:genre/:page (example: /api/genre/romance/1)<br>
+        Manhwa Info + Chapters at: /api/info/:slug (example: /api/info/hypnotized-sex-with-my-brother/)<br>
+        Manhwa Images List at: /api/chapter/:manga/:chapter (example: /api/chapter/real-no-heroine-wa-irimasen-english/69/)
         `)
 })
 
