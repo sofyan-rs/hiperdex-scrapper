@@ -68,12 +68,13 @@ async function chaptersList(url){
 
                 $elements = $(element)
                 title = $elements.find('a').text().trim()
+		ch = title.replace('Chapter ', '')
                 url = $elements.find('a').attr('href')
 		slug = url.replace('https://hiperdex.com/manga','/chapter')
                 time = $elements.find('.chapter-release-date').find('i').text()
                 status = $elements.find('.chapter-release-date').find('a').attr('title')
 
-                chapters = {'ch_title': title, 'time': time, 'status': status, 'url': url, 'slug': slug}
+                chapters = {'ch_title': title, 'ch': ch, 'time': time, 'status': status, 'url': url, 'slug': slug}
 
                 ch_list.push(chapters)     
         })
@@ -111,6 +112,7 @@ async function all(page) {
                 $(chapter).each((i,e)=>{
 
                     let c_title = $(e).find('a').text().trim()
+		    let c_ch = c_title.replace('Chapter ', '')
                     let c_url = $(e).find('a').attr('href')
 		    let c_slug = c_url.replace('https://hiperdex.com/manga','/chapter')
                     let c_date = $(e).find('.post-on').text().trim()
@@ -118,6 +120,7 @@ async function all(page) {
 
                     chapters.push({
                         'c_title': c_title,
+			'c_ch': c_ch,    
                         'c_url': c_url,
 			'c_slug': c_slug,
                         'c_date': c_date,
@@ -179,15 +182,19 @@ async function search(search, page) {
                 $(chapter).each((i,e)=>{
 
                     let c_title = $(e).find('a').text().trim()
+		    let c_ch = c_title.replace('Chapter ', '')
                     let c_url = $(e).find('a').attr('href')
 		    let c_slug = c_url.replace('https://hiperdex.com/manga','/chapter')
                     let c_date = $(e).find('.post-on').text().trim()
+                    let status = $(e).find('.post-on a').attr('title')
 
                     chapters.push({
                         'c_title': c_title,
+			'c_ch': c_ch,    
                         'c_url': c_url,
 			'c_slug': c_slug,
-                        'c_date': c_date
+                        'c_date': c_date,
+                        'status': status
                     })
                 })
 		
@@ -316,6 +323,7 @@ async function completed(page) {
                 $(chapter).each((i,e)=>{
 
                     let c_title = $(e).find('a').text().trim()
+		    let c_ch = c_title.replace('Chapter ', '')
                     let c_url = $(e).find('a').attr('href')
 		    let c_slug = c_url.replace('https://hiperdex.com/manga','/chapter')
                     let c_date = $(e).find('.post-on').text().trim()
@@ -323,6 +331,7 @@ async function completed(page) {
 
                     chapters.push({
                         'c_title': c_title,
+			'c_ch': c_ch,    
                         'c_url': c_url,
 			'c_slug': c_slug,
                         'c_date': c_date,
@@ -384,6 +393,7 @@ async function genre(genre, page) {
                 $(chapter).each((i,e)=>{
 
                     let c_title = $(e).find('a').text().trim()
+		    let c_ch = c_title.replace('Chapter ', '')
                     let c_url = $(e).find('a').attr('href')
 		    let c_slug = c_url.replace('https://hiperdex.com/manga','/chapter')
                     let c_date = $(e).find('.post-on').text().trim()
@@ -391,6 +401,7 @@ async function genre(genre, page) {
 
                     chapters.push({
                         'c_title': c_title,
+			'c_ch': c_ch,    
                         'c_url': c_url,
 			'c_slug': c_slug,
                         'c_date': c_date,
@@ -442,8 +453,9 @@ async function chapter(manga,chapter) {
                 ch_list.push({'ch': image})     
         })
 
-        let manga_title = $('#chapter-heading').text().trim()
-        let manga_url = $('.breadcrumb > li:nth-child(2) > a:nth-child(1)').attr('href')
+        let ch_title = $('#chapter-heading').text().trim()
+        let manga_title = $('.breadcrumb > li:nth-child(2) > a:nth-child(1)').text().trim()
+	let manga_url = $('.breadcrumb > li:nth-child(2) > a:nth-child(1)').attr('href')
         let manga_slug = manga_url.replace('https://hiperdex.com/manga','/series')
 	
         let current_ch = $('.active').text().trim()
@@ -452,7 +464,8 @@ async function chapter(manga,chapter) {
         let next = $('.next_page').attr('href')
 
         return await ({
-            'manga': manga_title,
+            'manga': ch_title,
+	    'manga_title': manga_title,
             'manga_url': manga_url,
 	    'manga_slug': manga_slug,
             'current_ch': current_ch,
