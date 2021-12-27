@@ -458,7 +458,8 @@ async function chapter(manga,chapter) {
 	let manga_url = $('.breadcrumb > li:nth-child(2) > a:nth-child(1)').attr('href')
         let manga_slug = manga_url.replace('https://hiperdex.com/manga','/series')
 	
-        let current_ch = $('.active').text().trim()
+        let ch = $('.active').text().trim()
+	let current_ch = ch.replace('Chapter ', '')
         
         let prev = $('.prev_page').attr('href')
         let next = $('.next_page').attr('href')
