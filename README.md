@@ -1,6 +1,6 @@
 # Hiperdex Scrapper API
 
-Manhwa/Manga Scrapper from hiperdex.com based on cheerio, node.js and express.
+Manhwa/Manga Scrapper from hiperdex.com based on cheerio, node.js and express
 
 ## Test Url
 
