@@ -12,7 +12,7 @@ async function info(slug) {
 	let id = slug;
         let manhwa_title = $('.post-title > h1:nth-child(1)').text().trim()
         let poster = $('.summary_image img').attr('src')
-        let author = $('.author-content a').text().trim()
+        let author = $('.author-content a').text().trim().join(", ")
         let artist = $('.artist-content a').text().trim()
 
         let genres_e = $('.genres-content a')
