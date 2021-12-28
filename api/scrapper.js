@@ -480,6 +480,7 @@ async function chapter(manga,chapter) {
         let ch = $('.active').text().trim()
 	let current_ch = ch.replace('Chapter ', '')
 	let ch_id = manga_id+'-chapter-'+current_ch
+	let filter_id = ch_id.replace(' - [END]','')
         
         let prev = $('.prev_page').attr('href')
         let next = $('.next_page').attr('href')
