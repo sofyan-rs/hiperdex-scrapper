@@ -486,7 +486,7 @@ async function chapter(manga,chapter) {
         let next = $('.next_page').attr('href')
 
         return await ({
-	    'id': ch_id,
+	    'id': filter_id,
             'manga': ch_title,
 	    'manga_title': manga_title,
             'manga_url': manga_url,
