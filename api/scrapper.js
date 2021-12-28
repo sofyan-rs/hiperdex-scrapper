@@ -467,7 +467,7 @@ async function chapter(manga,chapter) {
                 $elements = $(element)
                 image = $elements.attr('src').trim()
 
-                ch_list.push({'ch': image})     
+                ch_list.push({'img': image})     
         })
 
         let ch_title = $('#chapter-heading').text().trim()
