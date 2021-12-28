@@ -8,7 +8,8 @@ async function info(slug) {
         res = await axios.get(`https://hiperdex.com/manga/${slug}`)
         const body = await res.data;
         const $ = cheerio.load(body)
-
+	
+	let id = slug;
         let manhwa_title = $('.post-title > h1:nth-child(1)').text().trim()
         let poster = $('.summary_image img').attr('src')
         let author = $('.author-content a').text().trim()
