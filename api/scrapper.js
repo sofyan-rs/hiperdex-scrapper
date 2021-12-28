@@ -240,11 +240,12 @@ async function latest(page) {
         let p_title = $('.c-blog__heading h1').text().trim()
 
         $('#loop-content .badge-pos-1').each((index, element) => {
-
+		
                 $elements = $(element)
                 image = $elements.find('.page-item-detail').find('img').attr('src')
                 url = $elements.find('.page-item-detail').find('a').attr('href')
 		slug = url.replace('https://hiperdex.com/manga','/series')
+		id = slug.allReplace({'/series/': '', '/': ''})
                 title = $elements.find('.page-item-detail .post-title').find('h3').text().trim()
                 rating = $elements.find('.total_votes').text().trim()
 
@@ -272,6 +273,7 @@ async function latest(page) {
                 })
 
                 m_list.push({
+		    'id': id,
                     'title': title,
                     'rating': rating,
                     'image': image,
