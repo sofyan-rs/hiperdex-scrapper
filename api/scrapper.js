@@ -246,7 +246,7 @@ async function latest(page) {
                 url = $elements.find('.page-item-detail').find('a').attr('href')
 		slug = url.replace('https://hiperdex.com/manga','/series')
 		get_id = slug.replace('/series/','')
-		id = slug.replace('/','')
+		id = get_id.replace('/','')
                 title = $elements.find('.page-item-detail .post-title').find('h3').text().trim()
                 rating = $elements.find('.total_votes').text().trim()
 
