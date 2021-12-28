@@ -104,6 +104,8 @@ async function all(page) {
                 image = $elements.find('.page-item-detail').find('img').attr('src')
                 url = $elements.find('.page-item-detail').find('a').attr('href')
 		slug = url.replace('https://hiperdex.com/manga','/series')
+		get_id = slug.replace('/series/','')
+		id = get_id.replace('/','')
                 title = $elements.find('.page-item-detail .post-title').find('h3').text().trim()
                 rating = $elements.find('.total_votes').text().trim()
 
@@ -131,6 +133,7 @@ async function all(page) {
                 })
 
                 m_list.push({
+                    'id': id,
                     'title': title,
                     'rating': rating,
                     'image': image,
@@ -174,6 +177,8 @@ async function search(search, page) {
                 image = $elements.find('.c-image-hover').find('img').attr('src')
                 url = $elements.find('.c-image-hover').find('a').attr('href')
 		slug = url.replace('https://hiperdex.com/manga','/series')
+		get_id = slug.replace('/series/','')
+		id = get_id.replace('/','')
                 title = $elements.find('.tab-summary .post-title').find('h3').text().trim()
                 rating = $elements.find('.total_votes').text().trim()
 		
@@ -201,6 +206,7 @@ async function search(search, page) {
                 })
 		
 		m_list.push({
+                    'id': id,
                     'title': title,
                     'rating': rating,
                     'image': image,
@@ -318,6 +324,8 @@ async function completed(page) {
                 image = $elements.find('.page-item-detail').find('img').attr('src')
                 url = $elements.find('.page-item-detail').find('a').attr('href')
 		slug = url.replace('https://hiperdex.com/manga','/series')
+		get_id = slug.replace('/series/','')
+		id = get_id.replace('/','')
                 title = $elements.find('.page-item-detail .post-title').find('h3').text().trim()
                 rating = $elements.find('.total_votes').text().trim()
 
@@ -345,6 +353,7 @@ async function completed(page) {
                 })
 
                 m_list.push({
+                    'id': id,
                     'title': title,
                     'rating': rating,
                     'image': image,
@@ -388,6 +397,8 @@ async function genre(genre, page) {
                 image = $elements.find('.page-item-detail').find('img').attr('src')
                 url = $elements.find('.page-item-detail').find('a').attr('href')
 		slug = url.replace('https://hiperdex.com/manga','/series')
+		get_id = slug.replace('/series/','')
+		id = get_id.replace('/','')
                 title = $elements.find('.page-item-detail .post-title').find('h3').text().trim()
                 rating = $elements.find('.total_votes').text().trim()
 
@@ -415,6 +426,7 @@ async function genre(genre, page) {
                 })
 
                 m_list.push({
+                    'id': id,
                     'title': title,
                     'rating': rating,
                     'image': image,
