@@ -474,14 +474,18 @@ async function chapter(manga,chapter) {
         let manga_title = $('.breadcrumb > li:nth-child(2) > a:nth-child(1)').text().trim()
 	let manga_url = $('.breadcrumb > li:nth-child(2) > a:nth-child(1)').attr('href')
         let manga_slug = manga_url.replace('https://hiperdex.com/manga','/series')
+	let manga_getid = manga_slug.replace('/series/','')
+	let manga_id = manga_getid.replace('/','')
 	
         let ch = $('.active').text().trim()
+	let ch_id = manga_id+'-chapter-'+ch
 	let current_ch = ch.replace('Chapter ', '')
         
         let prev = $('.prev_page').attr('href')
         let next = $('.next_page').attr('href')
 
         return await ({
+	    'manga_id': ch_id,
             'manga': ch_title,
 	    'manga_title': manga_title,
             'manga_url': manga_url,
