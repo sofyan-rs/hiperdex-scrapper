@@ -39,6 +39,7 @@ async function info(slug) {
         let ch_list = await chaptersList(`https://hiperdex.com/manga/${slug}/ajax/chapters/`)
 
          return await ({
+	    'id': id,
             'page': manhwa_title,
             'other_name': other_name,
             'poster': poster,
