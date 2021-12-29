@@ -21,7 +21,14 @@ async function info(slug) {
         })
 	let author = author_list.map(e => e.author_name).join(", ");
 	
-        let artist = $('.artist-content a').text().trim()
+	let artist_list = []
+        let artist_e = $('.artist-content a')
+	$(artist_e).each((index, element)=>{
+	    $elements = $(element)
+	    artist_name = $elements.text().trim()
+	    artist_list.push({artist_name})
+        })
+	let artist = artist_list.map(e => e.artist_name).join(", ");
 
         let genres_e = $('.genres-content a')
         
