@@ -19,7 +19,7 @@ async function info(slug) {
 	    author_name = $elements.text().trim()
 	    author_list.push({author_name})
         })
-	let author = author_list
+	let author = author_list.map(e => e.author_name).join(", "));
 	
         let artist = $('.artist-content a').text().trim()
 
