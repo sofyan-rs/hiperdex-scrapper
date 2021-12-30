@@ -58,7 +58,6 @@ async function info(slug) {
      } catch (error) {
         return await ({'error': 'Sorry dude, an error occured! No Info!'});
      }
-
 }
 
 async function chaptersList(url){
@@ -198,7 +197,6 @@ async function search(search, page) {
      } catch (error) {
         return await ({'error': 'Sorry dude, an error occured! No List!'});
      }
-
 }
 
 async function latest(page) {
@@ -373,7 +371,6 @@ async function genre(genre, page) {
     } catch (error) {
         return await ({'error': 'Sorry dude, an error occured! No List!'});
     }
-
 }
 
 async function chapter(manga,chapter) {
