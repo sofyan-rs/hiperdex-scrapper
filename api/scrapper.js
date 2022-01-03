@@ -3,7 +3,6 @@ const axios = require('axios');
 
 async function info(slug) {
     let genres = [];
-    setTimeout(function() {
     try{
         res = await axios.get(`https://hiperdex.com/manga/${slug}`);
         const body = await res.data;
@@ -59,7 +58,6 @@ async function info(slug) {
      } catch (error) {
         return await ({'error': 'Sorry dude, an error occured! No Info!'});
      }
-     }, 10000);
 }
 
 async function chaptersList(url){
