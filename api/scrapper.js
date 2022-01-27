@@ -4,7 +4,7 @@ const axios = require('axios');
 async function info(slug) {
     let genres = [];
     try {
-        res = await axios.get(`https://hentai20.com/manga/${slug}`);
+        res = await axios.get(`https://manhwa18.me/manga/${slug}`);
         const body = await res.data;
         const $ = cheerio.load(body);
         let id = slug;
@@ -31,7 +31,7 @@ async function info(slug) {
             $elements = $(element);
             genre_title = $elements.text().trim();
             genre_url = $elements.attr('href');
-            genre_slug = genre_url.replace('https://hentai20.com/manga-genre', '/genre');
+            genre_slug = genre_url.replace('https://manhwa18.me/manhwa-genre', '/genre');
             genre_list = { 'genre_title': genre_title, 'genre_url': genre_url, 'genre_slug': genre_slug };
             genres.push(genre_list);
         });
@@ -40,7 +40,7 @@ async function info(slug) {
         let status = $('div.post-content_item:nth-child(2) > div:nth-child(2)').text().trim();
         let released = $('div.post-content_item:nth-child(1) > div:nth-child(2) a').text().trim();
         let description = $('.description-summary').text().trim();
-        let ch_list = await chaptersList(`https://hentai20.com/manga/${slug}/ajax/chapters/`);
+        let ch_list = await chaptersList(`https://manhwa18.me/manga/${slug}/ajax/chapters/`);
         return await ({
             'id': id,
             'page': manhwa_title,
@@ -71,7 +71,7 @@ async function chaptersList(url) {
             title = $elements.find('a').text().trim();
             ch = title.replace('Chapter ', '');
             url = $elements.find('a').attr('href');
-            slug = url.replace('https://hentai20.com/manga', '/chapter');
+            slug = url.replace('https://manhwa18.me/manga', '/chapter');
             time = $elements.find('.chapter-release-date').find('i').text();
             release_date = $elements.find('.chapter-release-date').find('a').attr('title');
             chapters = { 'ch_title': title, 'ch': ch, 'time': time, 'release_date': release_date, 'url': url, 'slug': slug };
@@ -86,7 +86,7 @@ async function chaptersList(url) {
 async function all(page) {
     let m_list = []
     try {
-        res = await axios.get(`https://hentai20.com/manga-list/page/${page}`);
+        res = await axios.get(`https://manhwa18.me/manga-list/page/${page}`);
         const body = await res.data;
         const $ = cheerio.load(body);
         let p_title = $('.c-blog__heading h1').text().trim();
@@ -94,7 +94,7 @@ async function all(page) {
             $elements = $(element);
             image = $elements.find('.page-item-detail').find('img').attr('src');
             url = $elements.find('.page-item-detail').find('a').attr('href');
-            slug = url.replace('https://hentai20.com/manga', '/series');
+            slug = url.replace('https://manhwa18.me/manga', '/series');
             get_id = slug.replace('/series/', '');
             id = get_id.replace('/', '');
             title = $elements.find('.page-item-detail .post-title').find('h3').text().trim();
@@ -105,7 +105,7 @@ async function all(page) {
                 let c_title = $(e).find('a').text().trim();
                 let c_ch = c_title.replace('Chapter ', '');
                 let c_url = $(e).find('a').attr('href');
-                let c_slug = c_url.replace('https://hentai20.com/manga', '/chapter');
+                let c_slug = c_url.replace('https://manhwa18.me/manga', '/chapter');
                 let c_date = $(e).find('.post-on').text().trim();
                 let status = $(e).find('.post-on a').attr('title');
                 chapters.push({
@@ -144,7 +144,7 @@ async function all(page) {
 async function search(search, page) {
     let m_list = [];
     try {
-        res = await axios.get(`https://hentai20.com/page/${page}/?s=${search}&post_type=wp-manga`);
+        res = await axios.get(`https://manhwa18.me/page/${page}/?s=${search}&post_type=wp-manga`);
         const body = await res.data;
         const $ = cheerio.load(body);
         let p_title = $('.c-blog__heading h1').text().trim();
@@ -152,7 +152,7 @@ async function search(search, page) {
             $elements = $(element);
             image = $elements.find('.c-image-hover').find('img').attr('src');
             url = $elements.find('.c-image-hover').find('a').attr('href');
-            slug = url.replace('https://hentai20.com/manga', '/series');
+            slug = url.replace('https://manhwa18.me/manga', '/series');
             get_id = slug.replace('/series/', '');
             id = get_id.replace('/', '');
             title = $elements.find('.tab-summary .post-title').find('h3').text().trim();
@@ -163,7 +163,7 @@ async function search(search, page) {
                 let c_title = $(e).find('a').text().trim();
                 let c_ch = c_title.replace('Chapter ', '');
                 let c_url = $(e).find('a').attr('href');
-                let c_slug = c_url.replace('https://hentai20.com/manga', '/chapter');
+                let c_slug = c_url.replace('https://manhwa18.me/manga', '/chapter');
                 let c_date = $(e).find('.post-on').text().trim();
                 let status = $(e).find('.post-on a').attr('title');
                 chapters.push({
@@ -202,7 +202,7 @@ async function search(search, page) {
 async function latest(page) {
     let m_list = [];
     try {
-        res = await axios.get(`https://hentai20.com/page/${page}`);
+        res = await axios.get(`https://manhwa18.me/page/${page}`);
         const body = await res.data;
         const $ = cheerio.load(body);
         let p_title = $('.c-blog__heading h1').text().trim();
@@ -210,7 +210,7 @@ async function latest(page) {
             $elements = $(element);
             image = $elements.find('.page-item-detail').find('img').attr('src');
             url = $elements.find('.page-item-detail').find('a').attr('href');
-            slug = url.replace('https://hentai20.com/manga', '/series');
+            slug = url.replace('https://manhwa18.me/manga', '/series');
             get_id = slug.replace('/series/', '');
             id = get_id.replace('/', '');
             title = $elements.find('.page-item-detail .post-title').find('h3').text().trim();
@@ -221,7 +221,7 @@ async function latest(page) {
                 let c_title = $(e).find('a').text().trim();
                 let c_ch = c_title.replace('Chapter ', '');
                 let c_url = $(e).find('a').attr('href');
-                let c_slug = c_url.replace('https://hentai20.com/manga', '/chapter');
+                let c_slug = c_url.replace('https://manhwa18.me/manga', '/chapter');
                 let c_date = $(e).find('.post-on').text().trim();
                 let status = $(e).find('.post-on a').attr('title');
                 chapters.push({
@@ -260,7 +260,7 @@ async function latest(page) {
 async function completed(page) {
     let m_list = [];
     try {
-        res = await axios.get(`https://hentai20.com/completed/page/${page}`);
+        res = await axios.get(`https://manhwa18.me/completed/page/${page}`);
         const body = await res.data;
         const $ = cheerio.load(body);
         let p_title = $('.c-blog__heading h1').text().trim();
@@ -268,7 +268,7 @@ async function completed(page) {
             $elements = $(element);
             image = $elements.find('.page-item-detail').find('img').attr('src');
             url = $elements.find('.page-item-detail').find('a').attr('href');
-            slug = url.replace('https://hentai20.com/manga', '/series');
+            slug = url.replace('https://manhwa18.me/manga', '/series');
             get_id = slug.replace('/series/', '');
             id = get_id.replace('/', '');
             title = $elements.find('.page-item-detail .post-title').find('h3').text().trim();
@@ -279,7 +279,7 @@ async function completed(page) {
                 let c_title = $(e).find('a').text().trim();
                 let c_ch = c_title.replace('Chapter ', '');
                 let c_url = $(e).find('a').attr('href');
-                let c_slug = c_url.replace('https://hentai20.com/manga', '/chapter');
+                let c_slug = c_url.replace('https://manhwa18.me/manga', '/chapter');
                 let c_date = $(e).find('.post-on').text().trim();
                 let status = $(e).find('.post-on a').attr('title');
                 chapters.push({
@@ -318,7 +318,7 @@ async function completed(page) {
 async function genre(genre, page) {
     let m_list = [];
     try {
-        res = await axios.get(`https://hentai20.com/manga-genre/${genre}/page/${page}`);
+        res = await axios.get(`https://manhwa18.me/manhwa-genre/${genre}/page/${page}`);
         const body = await res.data;
         const $ = cheerio.load(body);
         let p_title = $('.item-title.h4').text().trim();
@@ -326,7 +326,7 @@ async function genre(genre, page) {
             $elements = $(element);
             image = $elements.find('.page-item-detail').find('img').attr('src');
             url = $elements.find('.page-item-detail').find('a').attr('href');
-            slug = url.replace('https://hentai20.com/manga', '/series');
+            slug = url.replace('https://manhwa18.me/manga', '/series');
             get_id = slug.replace('/series/', '');
             id = get_id.replace('/', '');
             title = $elements.find('.page-item-detail .post-title').find('h3').text().trim();
@@ -337,7 +337,7 @@ async function genre(genre, page) {
                 let c_title = $(e).find('a').text().trim();
                 let c_ch = c_title.replace('Chapter ', '');
                 let c_url = $(e).find('a').attr('href');
-                let c_slug = c_url.replace('https://hentai20.com/manga', '/chapter');
+                let c_slug = c_url.replace('https://manhwa18.me/manga', '/chapter');
                 let c_date = $(e).find('.post-on').text().trim();
                 let status = $(e).find('.post-on a').attr('title');
                 chapters.push({
@@ -376,7 +376,7 @@ async function genre(genre, page) {
 async function chapter(manga, chapter) {
     let ch_list = [];
     try {
-        res = await axios.get(`https://hentai20.com/manga/${manga}/${chapter}`);
+        res = await axios.get(`https://manhwa18.me/manga/${manga}/${chapter}`);
         const body = await res.data;
         const $ = cheerio.load(body);
         $('.read-container img').each((index, element) => {
@@ -387,7 +387,7 @@ async function chapter(manga, chapter) {
         let ch_title = $('#chapter-heading').text().trim();
         let manga_title = $('.breadcrumb > li:nth-child(2) > a:nth-child(1)').text().trim();
         let manga_url = $('.breadcrumb > li:nth-child(2) > a:nth-child(1)').attr('href');
-        let manga_slug = manga_url.replace('https://hentai20.com/manga', '/series');
+        let manga_slug = manga_url.replace('https://manhwa18.me/manga', '/series');
         let manga_getid = manga_slug.replace('/series/', '');
         let manga_id = manga_getid.replace('/', '');
         let ch = $('.active').text().trim();
