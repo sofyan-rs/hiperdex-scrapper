@@ -60,26 +60,30 @@ async function info(slug) {
     }
 }
 
-async function chaptersList(url) {
+async function chaptersList(url){
     let ch_list = []
-    try {
-        res = await axios.post(url);
+
+    try{
+        res = await axios.post(url)
         const body = await res.data;
-        const $ = cheerio.load(body);
+        const $ = cheerio.load(body)
+
         $('.version-chap li').each((index, element) => {
-            $elements = $(element);
-            title = $elements.find('a').text().trim();
-            ch = title.replace('Chapter ', '');
-            url = $elements.find('a').attr('href');
-            slug = url.replace('https://hentai20.com/manga', '/chapter');
-            time = $elements.find('.chapter-release-date').find('i').text();
-            release_date = $elements.find('.chapter-release-date').find('a').attr('title');
-            chapters = { 'ch_title': $elements, 'ch': ch, 'time': time, 'release_date': release_date, 'url': url, 'slug': slug };
-            ch_list.push({'ch_title': 'hehe'});
-        });
-        return await (ch_list);
-    } catch (error) {
-        return await ('Error Getting Chapters!');
+
+                $elements = $(element)
+                title = $elements.find('a').text().trim()
+                url = $elements.find('a').attr('href')
+                time = $elements.find('.chapter-release-date').find('i').text()
+                status = $elements.find('.chapter-release-date').find('a').attr('title')
+
+                chapters = {'ch_title': title, 'time': time, 'status': status, 'url': url}
+
+                ch_list.push(chapters)     
+        })
+
+        return await (ch_list)
+    } catch(error) {
+        return await ('Error Getting Chapters!')
     }
 }
 
