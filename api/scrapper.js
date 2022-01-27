@@ -67,16 +67,17 @@ async function chaptersList(url) {
         const body = await res.data;
         const $ = cheerio.load(body);
         $('.version-chap li').each((index, element) => {
-            $elements = $(element);
-            title = $elements.find('a').text().trim();
-            ch = title.replace('Chapter ', '');
-            url = $elements.find('a').attr('href');
-            slug = url.replace('https://manhwa18.me/manhwa', '/chapter');
-            time = $elements.find('.chapter-release-date').find('i').text();
-            release_date = $elements.find('.chapter-release-date').find('a').attr('title');
-            chapters = { 'ch_title': title, 'ch': ch, 'time': time, 'release_date': release_date, 'url': url, 'slug': slug };
-            ch_list.push(chapters);
-        });
+
+                $elements = $(element)
+                title = $elements.find('a').text().trim()
+                url = $elements.find('a').attr('href')
+                time = $elements.find('.chapter-release-date').find('i').text()
+                status = $elements.find('.chapter-release-date').find('a').attr('title')
+
+                chapters = {'ch_title': title, 'time': time, 'status': status, 'url': url}
+
+                ch_list.push(chapters)     
+        })
         return await (ch_list);
     } catch (error) {
         return await ('Error Getting Chapters!');
