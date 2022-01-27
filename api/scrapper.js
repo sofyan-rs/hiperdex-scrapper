@@ -74,7 +74,7 @@ async function chaptersList(url) {
             slug = url.replace('https://hentai20.com/manga', '/chapter');
             time = $elements.find('.chapter-release-date').find('i').text();
             release_date = $elements.find('.chapter-release-date').find('a').attr('title');
-            chapters = { 'ch_title': $elements, 'ch': ch, 'time': time, 'release_date': release_date, 'url': url, 'slug': slug };
+            chapters = { 'ch_title': title, 'ch': ch, 'time': time, 'release_date': release_date, 'url': url, 'slug': slug };
             ch_list.push(chapters);
         });
         return await (ch_list);
