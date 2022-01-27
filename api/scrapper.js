@@ -4,7 +4,7 @@ const axios = require('axios');
 async function info(slug) {
     let genres = [];
     try {
-        res = await axios.get(`https://manhwa18.me/manga/${slug}`);
+        res = await axios.get(`https://manhwa18.me/manhwa/${slug}`);
         const body = await res.data;
         const $ = cheerio.load(body);
         let id = slug;
@@ -40,7 +40,7 @@ async function info(slug) {
         let status = $('div.post-content_item:nth-child(2) > div:nth-child(2)').text().trim();
         let released = $('div.post-content_item:nth-child(1) > div:nth-child(2) a').text().trim();
         let description = $('.description-summary').text().trim();
-        let ch_list = await chaptersList(`https://manhwa18.me/manga/${slug}/ajax/chapters/`);
+        let ch_list = await chaptersList(`https://manhwa18.me/manhwa/${slug}/ajax/chapters/`);
         return await ({
             'id': id,
             'page': manhwa_title,
