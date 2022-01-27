@@ -4,11 +4,11 @@ const axios = require('axios');
 async function info(slug) {
     let genres = [];
     try {
-        res = await axios.get(`https://manhwa18.me/manhwa/${slug}`);
+        res = await axios.get(`https://hentai20.com/manga/${slug}`);
         const body = await res.data;
         const $ = cheerio.load(body);
         let id = slug;
-        let manhwa_title = $('.post-title > h1:nth-child(1)').text().trim();
+        let manga_title = $('.post-title > h1:nth-child(1)').text().trim();
         let poster = $('.summary_image img').attr('src');
         let author_list = [];
         let author_e = $('.author-content a');
@@ -40,10 +40,10 @@ async function info(slug) {
         let status = $('div.post-content_item:nth-child(2) > div:nth-child(2)').text().trim();
         let released = $('div.post-content_item:nth-child(1) > div:nth-child(2) a').text().trim();
         let description = $('.description-summary').text().trim();
-        let ch_list = await chaptersList(`https://manhwa18.me/manhwa/${slug}/ajax/chapters/`);
+        let ch_list = await chaptersList(`https://hentai20.com/manga/${slug}/ajax/chapters/`);
         return await ({
             'id': id,
-            'page': manhwa_title,
+            'page': manga_title,
             'other_name': other_name,
             'poster': poster,
             'authors': author,
@@ -71,7 +71,7 @@ async function chaptersList(url) {
             title = $elements.find('a').text().trim();
             ch = title.replace('Chapter ', '');
             url = $elements.find('a').attr('href');
-            slug = url.replace('https://hiperdex.com/manga', '/chapter');
+            slug = url.replace('https://hentai20.com/manga', '/chapter');
             time = $elements.find('.chapter-release-date').find('i').text();
             release_date = $elements.find('.chapter-release-date').find('a').attr('title');
             chapters = { 'ch_title': $elements, 'ch': ch, 'time': time, 'release_date': release_date, 'url': url, 'slug': slug };
@@ -376,7 +376,7 @@ async function genre(genre, page) {
 async function chapter(manga, chapter) {
     let ch_list = [];
     try {
-        res = await axios.get(`https://manhwa18.me/manhwa/${manga}/${chapter}`);
+        res = await axios.get(`https://hentai20.com/manga/${manga}/${chapter}`);
         const body = await res.data;
         const $ = cheerio.load(body);
         $('.read-container img').each((index, element) => {
