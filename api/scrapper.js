@@ -71,7 +71,7 @@ async function chaptersList(url) {
             title = $elements.find('a').text().trim();
             ch = title.replace('Chapter ', '');
             url = $elements.find('a').attr('href');
-            slug = url.replace('https://manhwa18.me/manga', '/chapter');
+            slug = url.replace('https://manhwa18.me/manhwa', '/chapter');
             time = $elements.find('.chapter-release-date').find('i').text();
             release_date = $elements.find('.chapter-release-date').find('a').attr('title');
             chapters = { 'ch_title': title, 'ch': ch, 'time': time, 'release_date': release_date, 'url': url, 'slug': slug };
