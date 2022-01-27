@@ -2,73 +2,84 @@ const cheerio = require('cheerio');
 const axios = require('axios');
 
 async function info(slug) {
-    let genres = []
-
-    try{
-        res = await axios.get(`https://hentai20.com/manga/${slug}`)
+    let genres = [];
+    try {
+        res = await axios.get(`https://hentai20.com/manga/${slug}`);
         const body = await res.data;
-        const $ = cheerio.load(body)
-
-        let manhwa_title = $('.post-title > h1:nth-child(1)').text().trim()
-        let poster = $('.summary_image img').attr('src')
-        let author = $('.author-content a').text().trim()
-        let artist = $('.artist-content a').text().trim()
-
-        let genres_e = $('.genres-content a')
-        
-        $(genres_e).each((i,e)=>{
-            genres.push($(e).text().trim())
-        })
-
-        let other_name = $('div.post-content_item:nth-child(5) > div:nth-child(2)').text().trim()
-        
-        let status = $('div.post-content_item:nth-child(2) > div:nth-child(2)').text().trim()
-        
-        let description = $('.description-summary').text().trim()
-
-        let ch_list = await chaptersList(`https://hentai20.com/manga/${slug}/ajax/chapters/`)
-
-         return await ({
+        const $ = cheerio.load(body);
+        let id = slug;
+        let manhwa_title = $('.post-title > h1:nth-child(1)').text().trim();
+        let poster = $('.summary_image img').attr('src');
+        let author_list = [];
+        let author_e = $('.author-content a');
+        $(author_e).each((index, element) => {
+            $elements = $(element);
+            author_name = $elements.text().trim();
+            author_list.push({ author_name });
+        });
+        let author = author_list.map(e => e.author_name).join(", ");
+        let artist_list = [];
+        let artist_e = $('.artist-content a');
+        $(artist_e).each((index, element) => {
+            $elements = $(element);
+            artist_name = $elements.text().trim();
+            artist_list.push({ artist_name });
+        });
+        let artist = artist_list.map(e => e.artist_name).join(", ");
+        let genres_e = $('.genres-content a');
+        $(genres_e).each((index, element) => {
+            $elements = $(element);
+            genre_title = $elements.text().trim();
+            genre_url = $elements.attr('href');
+            genre_slug = genre_url.replace('https://hentai20.com/manga-genre', '/genre');
+            genre_list = { 'genre_title': genre_title, 'genre_url': genre_url, 'genre_slug': genre_slug };
+            genres.push(genre_list);
+        });
+        let other_name = $('div.post-content_item:nth-child(5) > div:nth-child(2)').text().trim();
+        let type = $('div.post-content_item:nth-child(9) > div:nth-child(2)').text().trim();
+        let status = $('div.post-content_item:nth-child(2) > div:nth-child(2)').text().trim();
+        let released = $('div.post-content_item:nth-child(1) > div:nth-child(2) a').text().trim();
+        let description = $('.description-summary').text().trim();
+        let ch_list = await chaptersList(`https://hentai20.com/manga/${slug}/ajax/chapters/`);
+        return await ({
+            'id': id,
             'page': manhwa_title,
             'other_name': other_name,
             'poster': poster,
             'authors': author,
             'artists': artist,
-            'genres':genres,
+            'genres': genres,
+            'type': type,
             'status': status,
+            'released': released,
             'description': description,
             ch_list
-        })
-     } catch (error) {
-        return await ({'error': 'Sorry dude, an error occured! No Info!'})
-     }
-
+        });
+    } catch (error) {
+        return await ({ 'error': 'Sorry dude, an error occured! No Info!' });
+    }
 }
 
-async function chaptersList(url){
+async function chaptersList(url) {
     let ch_list = []
-
-    try{
-        res = await axios.post(url)
+    try {
+        res = await axios.post(url);
         const body = await res.data;
-        const $ = cheerio.load(body)
-
+        const $ = cheerio.load(body);
         $('.version-chap li').each((index, element) => {
-
-                $elements = $(element)
-                title = $elements.find('a').text().trim()
-                url = $elements.find('a').attr('href')
-                time = $elements.find('.chapter-release-date').find('i').text()
-                status = $elements.find('.chapter-release-date').find('a').attr('title')
-
-                chapters = {'ch_title': title, 'time': time, 'status': status, 'url': url}
-
-                ch_list.push(chapters)     
-        })
-
-        return await (ch_list)
-    } catch(error) {
-        return await ('Error Getting Chapters!')
+            $elements = $(element);
+            title = $elements.find('a').text().trim();
+            ch = title.replace('Chapter ', '');
+            url = $elements.find('a').attr('href');
+            slug = url.replace('https://hentai20.com/manga', '/chapter');
+            time = $elements.find('.chapter-release-date').find('i').text();
+            release_date = $elements.find('.chapter-release-date').find('a').attr('title');
+            chapters = { 'ch_title': $elements, 'ch': ch, 'time': time, 'release_date': release_date, 'url': url, 'slug': slug };
+            ch_list.push({'ch_title': 'hehe'});
+        });
+        return await (ch_list);
+    } catch (error) {
+        return await ('Error Getting Chapters!');
     }
 }
 
